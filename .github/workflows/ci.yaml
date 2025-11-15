@@ -10,7 +10,7 @@ on:
       - 'helm/**'
 jobs:
   build:
-    runs: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
@@ -23,7 +23,7 @@ jobs:
       - name: Test
         uses: go test ./..
   code-quality:
-    runs: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
@@ -32,7 +32,7 @@ jobs:
         with:
         version: v2.1
   image-push:
-    runs: ubuntu-latest
+    runs-on: ubuntu-latest
     needs: build
 
     steps:
@@ -53,7 +53,7 @@ jobs:
           push: true
           tags: ${{secrets.DOCKERHUB_USERNAME}}/go-web-app:${{github.run_id}}
   update-tag-in-helm:
-    runs: ubuntu-latest
+    runs-on: ubuntu-latest
     needs: push  
     steps:
       - name: Checkout Repository
