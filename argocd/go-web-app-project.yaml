@@ -1,0 +1,26 @@
+kind: AppProject
+apiVersion: argoproj.io/v1alpha1
+metadata:
+  name: go-project
+  namespace: argocd
+spec:
+  description: "This project will basically contains the application of the go language"
+
+  sourceRepos:
+    - '*'
+  destinations:
+    - server: '*'
+      namespace: "*"
+  
+  clusterResourceWhitelist:
+    - kind: "*"
+      group:  "*"   
+  
+  namespaceResourceWhitelist:
+    - kind: "*"
+      group: "*"
+  roles:
+    - name: go-project-admin
+      description: "This is basically role of the go-project"
+      policies:
+        - p,proj:go-project:go-project-admin,applications,*,go-project/*,allow

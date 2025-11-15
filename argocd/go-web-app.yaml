@@ -1,0 +1,18 @@
+kind: Application
+apiVersion: argoproj.io/v1alpha1
+metadata:
+  name: go-web-app
+  namespace: argocd
+spec:
+  project: go-project
+  source:
+    repoURL : https://github.com/pr12sdd/go-web-app.git
+    targetRevision: master
+    path: helm/go-web-app-chart
+  destination:
+    server: https://AB7A4FC821CF80A0EF6F15BE7201786D.gr7.us-east-2.eks.amazonaws.com
+    namespace: go-web-app
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
